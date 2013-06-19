@@ -75,3 +75,16 @@ class TestCase(unittest.TestCase):
         self.failIf('mobi-navbar-link' in xml)
         self.failUnless('web-menu-link' in xml)
         self.failIf('mobi-menu-link' in xml)
+
+    def test_html(self):
+        # Create html sitemap
+        hsm = preferences.HTMLSitemap
+        hsm.generate_draft()
+        hsm.make_draft_live()
+
+        # Test rendering
+        html = self.client.get(reverse('html-sitemap')).content
+        self.failUnless('web-navbar-link' in html)
+        self.failIf('mobi-navbar-link' in html)
+        self.failUnless('web-menu-link' in html)
+        self.failIf('mobi-menu-link' in html)
