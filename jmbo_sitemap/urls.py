@@ -8,7 +8,12 @@ from jmbo_sitemap import sitemaps
 urlpatterns = patterns(
     '',
 
-    (r'^sitemap\.xml$', 'jmbo_sitemap.sitemap', {'sitemaps': sitemaps}),
+    url(
+        r'^sitemap\.xml$', 
+        'jmbo_sitemap.sitemap', 
+        {'sitemaps': sitemaps}, 
+        name='sitemap'
+    ),
 
     url(
         r'^sitemap/$',

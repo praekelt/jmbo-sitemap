@@ -5,8 +5,6 @@ from django.template.response import TemplateResponse
 from django.views.decorators.cache import cache_page
 from django.contrib.sitemaps import Sitemap, FlatPageSitemap
 
-from foundry.models import Navbar, Menu
-
 
 """Slight adaptation of default Django sitemaps view passes request to callable
 site object"""
@@ -71,6 +69,8 @@ class MainNavbarLinkSitemap(BaseLinkSitemap):
     priority = 1.0
 
     def get_containers(self):
+        # Prevent circular import
+        from foundry.models import Navbar
         return Navbar.permitted.filter(slug='main')
 
 
@@ -78,6 +78,8 @@ class MainMenuLinkSitemap(BaseLinkSitemap):
     priority = 1.0
 
     def get_containers(self):
+        # Prevent circular import
+        from foundry.models import Menu
         return Menu.permitted.filter(slug='main')
 
 
@@ -85,6 +87,8 @@ class SubNavbarsLinkSitemap(BaseLinkSitemap):
     priority = 0.75
 
     def get_containers(self):
+        # Prevent circular import
+        from foundry.models import Navbar
         return Navbar.permitted.all().exclude(slug='main')
 
 
@@ -92,6 +96,8 @@ class SubMenusLinkSitemap(BaseLinkSitemap):
     priority = 0.75
 
     def get_containers(self):
+        # Prevent circular import
+        from foundry.models import Menu
         return Menu.permitted.all().exclude(slug='main')
 
 
