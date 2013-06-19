@@ -10,7 +10,7 @@ Installation
 
 #. Install or add ``jmbo-sitemap`` to your Python path.
 
-#. Add ``jmbo_sitemap`` to your ``INSTALLED_APPS`` setting.
+#. Add ``jmbo_sitemap`` and ``django.contrib.sitemaps`` to your ``INSTALLED_APPS`` setting.
 
-#. Add (r'^/', include('jmbo_sitemap.urls')) to urlpatterns.
+#. Add (r'^', include('jmbo_sitemap.urls')) to urlpatterns. You may need to add this early in the chain so other patterns don't take precedence.
 
