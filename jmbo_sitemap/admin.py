@@ -10,7 +10,7 @@ from preferences.admin import PreferencesAdmin, csrf_protect_m
 from jmbo_sitemap.models import HTMLSitemap
 
 
-class HTMLSitemapAdmin(PreferencesAdmin):   
+class HTMLSitemapAdmin(PreferencesAdmin):
 
     @csrf_protect_m
     def changelist_view(self, request, extra_context=None):
@@ -31,11 +31,11 @@ class HTMLSitemapAdmin(PreferencesAdmin):
         if '_generate_draft' in request.POST:
             msg = _('The draft has been generated.')
             self.message_user(request, msg)
-            result = HttpResponseRedirect(request.path) 
+            result = HttpResponseRedirect(request.path)
         elif '_make_draft_live' in request.POST:
             msg = _('The draft has been made live.')
             self.message_user(request, msg)
-            result = HttpResponseRedirect(request.path) 
+            result = HttpResponseRedirect(request.path)
         return result
 
     def save_model(self, request, obj, form, change):
