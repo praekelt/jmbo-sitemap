@@ -52,11 +52,9 @@ class BaseLinkSitemap(Sitemap):
     def items(self):
         added = []
         links = []
-        linkposition_set = None
         for obj in self.get_containers():
-            if linkposition_set is None:
-                linkposition_set = getattr(obj, obj.__class__.__name__.lower() \
-                    + 'linkposition_set')
+            linkposition_set = getattr(obj, obj.__class__.__name__.lower() \
+                + 'linkposition_set')
             for o in linkposition_set.select_related().all().order_by('position'):
                 if o.condition_expression_result(self.request) \
                     and (o.link.id not in added):

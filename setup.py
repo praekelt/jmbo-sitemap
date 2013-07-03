@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='jmbo-sitemap',
-    version='0.1',
+    version='0.1.1',
     description='XML and HTML sitemap product for Jmbo',
     long_description = open('README.rst', 'r').read() + open('AUTHORS.rst', 'r').read() + open('CHANGELOG.rst', 'r').read(),
     author='Praekelt Foundation',
@@ -15,7 +15,7 @@ setup(
     ],
     include_package_data=True,
     tests_require=[
-        'django-setuptest>=0.1.3',
+        'django-setuptest>=0.1.4',
     ],
     test_suite="setuptest.setuptest.SetupTestSuite",
     classifiers=[
