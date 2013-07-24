@@ -4,6 +4,7 @@ Changelog
 next
 ----
 #. Omit external links from sitemap.
+#. Google will not accept a sitemap with no urls. In such a case link back to the site.
 
 0.1.1
 -----
