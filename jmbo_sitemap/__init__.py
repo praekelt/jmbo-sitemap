@@ -36,6 +36,10 @@ def sitemap(request, sitemaps, section=None,
             raise Http404("Page %s empty" % page)
         except PageNotAnInteger:
             raise Http404("No page '%s'" % page)
+    # Google will not accept a sitemap with no urls. In such a case link back
+    # to the site.
+    if not urls:
+        urls = [{'location': '%s://%s' % (req_protocol, req_site.domain)}]
     return TemplateResponse(request, template_name, {'urlset': urls},
                             content_type=mimetype)
 
@@ -58,8 +62,10 @@ class BaseLinkSitemap(Sitemap):
             for o in linkposition_set.select_related().all().order_by('position'):
                 if o.condition_expression_result(self.request) \
                     and (o.link.id not in added):
-                    links.append(o.link)
-                    added.append(o.link.id)
+                    # Skip over external links
+                    if not o.link.get_absolute_url().startswith('http'):
+                        links.append(o.link)
+                        added.append(o.link.id)
         return links
 
 
