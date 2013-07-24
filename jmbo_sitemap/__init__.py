@@ -58,8 +58,10 @@ class BaseLinkSitemap(Sitemap):
             for o in linkposition_set.select_related().all().order_by('position'):
                 if o.condition_expression_result(self.request) \
                     and (o.link.id not in added):
-                    links.append(o.link)
-                    added.append(o.link.id)
+                    # Skip over external links
+                    if not o.link.get_absolute_url().startswith('http'):
+                        links.append(o.link)
+                        added.append(o.link.id)
         return links
 
 

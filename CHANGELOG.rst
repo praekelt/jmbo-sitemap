@@ -1,6 +1,10 @@
 Changelog
 =========
 
+next
+----
+#. Omit external links from sitemap.
+
 0.1.1
 -----
 #. Use `django-setuptest>=0.1.4`.
