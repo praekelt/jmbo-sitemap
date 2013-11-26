@@ -11,7 +11,7 @@ from foundry.models import Navbar, Menu, Page, Link, NavbarLinkPosition, \
 
 class TestCase(unittest.TestCase):
 
-    @classmethod  
+    @classmethod
     def setUpClass(cls):
         cls.request = RequestFactory()
         cls.client = Client()

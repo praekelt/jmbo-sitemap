@@ -12,4 +12,4 @@ DATABASES = {
     }
 }
 
-SOUTH_TESTS_MIGRATE = False
+# Need this last line until django-setuptest is improved.
