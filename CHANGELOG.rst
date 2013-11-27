@@ -1,6 +1,10 @@
 Changelog
 =========
 
+next
+----
+#. Clean up tests.
+
 0.1.2
 -----
 #. Omit external links from sitemap.
