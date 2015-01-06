@@ -1,9 +1,7 @@
 from django.conf.urls import patterns, url
 from django.views.generic.base import TemplateView
 
-from preferences import preferences
-
-from jmbo_sitemap import sitemaps
+from jmbo_sitemap import sitemaps, views
 
 
 urlpatterns = patterns(
@@ -17,11 +15,8 @@ urlpatterns = patterns(
     ),
 
     url(
-        r'^sitemap/$',
-        TemplateView.as_view(template_name='jmbo_sitemap/sitemap.html'),
-        {
-            'extra_context': {'content': lambda: preferences.HTMLSitemap.content}
-        },
+        r'^xsitemap/$',
+        views.SitemapHTMLView.as_view(),
         name='html-sitemap'
     ),
 )
