@@ -1,4 +1,5 @@
-from django.conf.urls.defaults import patterns, url
+from django.conf.urls import patterns, url
+from django.views.generic.base import TemplateView
 
 from preferences import preferences
 
@@ -9,17 +10,16 @@ urlpatterns = patterns(
     '',
 
     url(
-        r'^sitemap\.xml$', 
-        'jmbo_sitemap.sitemap', 
-        {'sitemaps': sitemaps}, 
+        r'^sitemap\.xml$',
+        'jmbo_sitemap.sitemap',
+        {'sitemaps': sitemaps},
         name='sitemap'
     ),
 
     url(
         r'^sitemap/$',
-        'django.views.generic.simple.direct_to_template',
+        TemplateView.as_view(template_name='jmbo_sitemap/sitemap.html'),
         {
-            'template': 'jmbo_sitemap/sitemap.html', 
             'extra_context': {'content': lambda: preferences.HTMLSitemap.content}
         },
         name='html-sitemap'
