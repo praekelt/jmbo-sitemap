@@ -4,6 +4,7 @@ Changelog
 next
 ----
 #. Clean up tests.
+#. Django 1.6 compatibility.
 
 0.1.2
 -----
