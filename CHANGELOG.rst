@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.0.0a1
+-------
+#. Clean up tests.
+#. Django 1.6 compatibility.
+
 0.1.2
 -----
 #. Omit external links from sitemap.

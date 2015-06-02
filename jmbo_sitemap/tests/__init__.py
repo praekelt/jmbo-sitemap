@@ -1,4 +1,4 @@
-from django.utils import unittest
+from django.test import TestCase
 from django.test.client import Client, RequestFactory
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
@@ -9,9 +9,9 @@ from foundry.models import Navbar, Menu, Page, Link, NavbarLinkPosition, \
     MenuLinkPosition
 
 
-class TestCase(unittest.TestCase):
+class TestCase(TestCase):
 
-    @classmethod  
+    @classmethod
     def setUpClass(cls):
         cls.request = RequestFactory()
         cls.client = Client()
