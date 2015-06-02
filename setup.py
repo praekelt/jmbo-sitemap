@@ -11,11 +11,13 @@ setup(
     url='http://github.com/praekelt/jmbo-sitemap',
     packages = find_packages(),
     install_requires = [
-        'jmbo-foundry',
+        'jmbo==2.0.0a2',
     ],
     include_package_data=True,
     tests_require=[
-        'django-setuptest>=0.1.4',
+        'django-setuptest>=0.1.6',
+        'jmbo-foundry==2.0.0a1',
+        'psycopg2',
     ],
     test_suite="setuptest.setuptest.SetupTestSuite",
     classifiers=[

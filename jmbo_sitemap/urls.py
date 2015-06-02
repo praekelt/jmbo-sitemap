@@ -9,13 +9,13 @@ urlpatterns = patterns(
 
     url(
         r'^sitemap\.xml$',
-        'jmbo_sitemap.sitemap',
+        views.sitemap,
         {'sitemaps': sitemaps},
         name='sitemap'
     ),
 
     url(
-        r'^xsitemap/$',
+        r'^sitemap/$',
         views.SitemapHTMLView.as_view(),
         name='html-sitemap'
     ),

@@ -1,47 +1,6 @@
-from django.contrib.sites.models import get_current_site
-from django.core.paginator import EmptyPage, PageNotAnInteger
-from django.http import Http404
-from django.template.response import TemplateResponse
-from django.views.decorators.cache import cache_page
 from django.contrib.sitemaps import Sitemap, FlatPageSitemap
 
-
-"""Slight adaptation of default Django sitemaps view passes request to callable
-site object"""
-@cache_page(60*5)
-def sitemap(request, sitemaps, section=None,
-            template_name='sitemap.xml', mimetype='application/xml'):
-    req_protocol = 'https' if request.is_secure() else 'http'
-    req_site = get_current_site(request)
-
-    if section is not None:
-        if section not in sitemaps:
-            raise Http404("No sitemap available for section: %r" % section)
-        maps = [sitemaps[section]]
-    else:
-        maps = sitemaps.values()
-    page = request.GET.get("p", 1)
-
-    urls = []
-    for site in maps:
-        try:
-            if callable(site):
-                try:
-                    site = site(request)
-                except TypeError:
-                    site = site()
-            urls.extend(site.get_urls(page=page, site=req_site,
-                                      protocol=req_protocol))
-        except EmptyPage:
-            raise Http404("Page %s empty" % page)
-        except PageNotAnInteger:
-            raise Http404("No page '%s'" % page)
-    # Google will not accept a sitemap with no urls. In such a case link back
-    # to the site.
-    if not urls:
-        urls = [{'location': '%s://%s' % (req_protocol, req_site.domain)}]
-    return TemplateResponse(request, template_name, {'urlset': urls},
-                            content_type=mimetype)
+from django.conf import settings
 
 
 class BaseLinkSitemap(Sitemap):
@@ -112,3 +71,11 @@ sitemaps = {
     'sub-navbars': SubNavbarsLinkSitemap,
     'sub-menus': SubMenusLinkSitemap,
 }
+
+if 'foundry' in settings.INSTALLED_APPS:
+    sitemaps.update({
+        'main-navbar': MainNavbarLinkSitemap,
+        'main-menu': MainMenuLinkSitemap,
+        'sub-navbars': SubNavbarsLinkSitemap,
+        'sub-menus': SubMenusLinkSitemap,
+    })
