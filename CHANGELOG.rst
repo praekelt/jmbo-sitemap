@@ -1,8 +1,8 @@
 Changelog
 =========
 
-next
-----
+2.0.0a2
+-------
 #. Allow sitemaps to be set from settings.
 
 2.0.0a1
