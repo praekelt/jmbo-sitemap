@@ -73,10 +73,6 @@ except (AttributeError, KeyError):
 if not sitemaps:
     sitemaps = {
         'flatpages': FlatPageSitemap,
-        'main-navbar': MainNavbarLinkSitemap,
-        'main-menu': MainMenuLinkSitemap,
-        'sub-navbars': SubNavbarsLinkSitemap,
-        'sub-menus': SubMenusLinkSitemap,
     }
 
     if 'foundry' in settings.INSTALLED_APPS:
