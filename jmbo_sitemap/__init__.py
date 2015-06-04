@@ -63,19 +63,33 @@ class SubMenusLinkSitemap(BaseLinkSitemap):
         from foundry.models import Menu
         return Menu.permitted.all().exclude(slug='main')
 
+# Sitemaps can be set via settings
+sitemaps = {}
+try:
+    sitemaps = settings.JMBO_SITEMAP['sitemaps']
+except (AttributeError, KeyError):
+    pass
 
-sitemaps = {
-    'flatpages': FlatPageSitemap,
-    'main-navbar': MainNavbarLinkSitemap,
-    'main-menu': MainMenuLinkSitemap,
-    'sub-navbars': SubNavbarsLinkSitemap,
-    'sub-menus': SubMenusLinkSitemap,
-}
-
-if 'foundry' in settings.INSTALLED_APPS:
-    sitemaps.update({
+if not sitemaps:
+    sitemaps = {
+        'flatpages': FlatPageSitemap,
         'main-navbar': MainNavbarLinkSitemap,
         'main-menu': MainMenuLinkSitemap,
         'sub-navbars': SubNavbarsLinkSitemap,
         'sub-menus': SubMenusLinkSitemap,
-    })
+    }
+
+    if 'foundry' in settings.INSTALLED_APPS:
+        sitemaps.update({
+            'main-navbar': MainNavbarLinkSitemap,
+            'main-menu': MainMenuLinkSitemap,
+            'sub-navbars': SubNavbarsLinkSitemap,
+            'sub-menus': SubMenusLinkSitemap,
+        })
+
+try:
+    extra = settings.JMBO_SITEMAP['extra-sitemaps']
+except (AttributeError, KeyError):
+    pass
+else:
+    sitemaps.update(extra)

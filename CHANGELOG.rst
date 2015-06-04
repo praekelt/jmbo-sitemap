@@ -1,6 +1,10 @@
 Changelog
 =========
 
+next
+----
+#. Allow sitemaps to be set from settings.
+
 2.0.0a1
 -------
 #. Clean up tests.
