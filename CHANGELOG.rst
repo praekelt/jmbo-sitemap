@@ -1,6 +1,10 @@
 Changelog
 =========
 
+next
+----
+#. Sitemap classes can now be specified as strings in settings.
+
 2.0.0a2
 -------
 #. Allow sitemaps to be set from settings.

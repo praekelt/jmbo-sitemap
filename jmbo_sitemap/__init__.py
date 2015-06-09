@@ -1,4 +1,7 @@
+import types
+
 from django.contrib.sitemaps import Sitemap, FlatPageSitemap
+from django.utils.module_loading import import_by_path
 
 from django.conf import settings
 
@@ -89,3 +92,8 @@ except (AttributeError, KeyError):
     pass
 else:
     sitemaps.update(extra)
+
+# Load classes if required
+for k, v in sitemaps.items():
+    if isinstance(v, types.StringType):
+        sitemaps[k] = import_by_path(v)
