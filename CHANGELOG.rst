@@ -1,8 +1,8 @@
 Changelog
 =========
 
-next
-----
+2.0.0a3
+-------
 #. Sitemap classes can now be specified as strings in settings.
 
 2.0.0a2
