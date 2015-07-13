@@ -1,8 +1,8 @@
 Changelog
 =========
 
-next
-----
+2.0.1
+-----
 #. Allow the use of a custom generator.
 
 2.0.0
