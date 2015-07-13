@@ -8,6 +8,12 @@ from preferences import preferences
 from foundry.models import Navbar, Menu, Page, Link, NavbarLinkPosition, \
     MenuLinkPosition
 
+from jmbo_sitemap import models
+
+
+def generator():
+    return 'foofoo'
+
 
 class TestCase(TestCase):
 
@@ -82,9 +88,16 @@ class TestCase(TestCase):
         hsm.generate_draft()
         hsm.make_draft_live()
 
-        # Test rendering
+        # Test default rendering
         html = self.client.get(reverse('html-sitemap')).content
         self.failUnless('web-navbar-link' in html)
         self.failIf('mobi-navbar-link' in html)
         self.failUnless('web-menu-link' in html)
         self.failIf('mobi-menu-link' in html)
+
+        # Test custom rendering
+        models.generator = generator
+        hsm.generate_draft()
+        hsm.make_draft_live()
+        html = self.client.get(reverse('html-sitemap')).content
+        self.failUnless('foofoo' in html)

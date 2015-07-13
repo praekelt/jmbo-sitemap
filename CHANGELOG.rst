@@ -1,6 +1,10 @@
 Changelog
 =========
 
+next
+----
+#. Allow the use of a custom generator.
+
 2.0.0
 -----
 #. Stabilize on Jmbo 2.0.0.
